@@ -27,21 +27,25 @@
         });
 
         function createGrid(size) {
-            for (i = 0; i < size; i++) {
 
-                let rowContainer = document.createElement("div");
-                rowContainer.classList.add("row-container");
-
-                for (j = 0; j < size; j++) {
-                    let gridSquare = document.createElement("div");
-                    gridSquare.classList.add("square");
-                    gridSquare.addEventListener("mouseover", () => {
-                        gridSquare.setAttribute("style", "background-color: black");
-                    });
-                    rowContainer.appendChild(gridSquare);
-                }
-
-                container.appendChild(rowContainer);
+            let lastRowContainer = undefined;
+            
+            for (i = 0; i < (size * size); i++) {
+                switch (true) {
+                    case i % size === 0:
+                        let rowContainer = document.createElement("div");
+                        rowContainer.classList.add("row-container");
+                        container.appendChild(rowContainer);
+                        
+                        lastRowContainer = document.querySelector(".row-container:last-child");
+                    default:
+                        let gridSquare = document.createElement("div");
+                        gridSquare.classList.add("square");
+                        gridSquare.addEventListener("mouseover", () => {
+                            gridSquare.setAttribute("style", "background-color: black");
+                        });
+                        lastRowContainer.appendChild(gridSquare);
+                } 
             }
         }
     </script>
